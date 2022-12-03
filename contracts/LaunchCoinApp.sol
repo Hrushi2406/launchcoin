@@ -131,7 +131,7 @@ contract LaunchCoinApp is ReentrancyGuard {
                             abi.encodePacked(
                                 "0", // this is notification identity: https://docs.epns.io/developers/developer-guides/sending-notifications/advanced/notification-payload-types/identity/payload-identity-implementations
                                 "+", // segregator
-                                "3", // this is payload type: https://docs.epns.io/developers/developer-guides/sending-notifications/advanced/notification-payload-types/payload (1, 3 or 4) = (Broadcast, targetted or subset)
+                                "4", // this is payload type: https://docs.epns.io/developers/developer-guides/sending-notifications/advanced/notification-payload-types/payload (1, 3 or 4) = (Broadcast, targetted or subset)
                                 "+", // segregator
                                 "Received Airdrop!", // this is notificaiton title
                                 "+", // segregator
@@ -157,7 +157,7 @@ contract LaunchCoinApp is ReentrancyGuard {
         address pairTokenAddress
     ) external {
         address poolContractAddress = IUniswapV3Factory(UNISWAP_V3_FACTORY)
-            .createPool(tokenAddress, pairTokenAddress, 500);
+            .createPool(tokenAddress, pairTokenAddress, 100);
 
         tokenToPoolIds[tokenAddress].add(++currPoolId);
 

@@ -7,6 +7,8 @@ module.exports = {
       url: "https://rpc-mumbai.maticvigil.com",
       accounts: [
         "8d52d31582293e73ef81bc57f0c1ef9a6de5871594377cd3f2615684302a0c09",
+        "afb2525727490ee3420d4cff501fad2d4040feb7158d163be2be97bfe645bf29",
+        "139d2fd74cef42a4fabe03e474a6555cb72f0e0c180159b2658c91b01fe1b806",
       ],
     },
   },
