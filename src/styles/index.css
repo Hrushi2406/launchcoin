@@ -5,8 +5,22 @@
 @import "./fonts.css";
 
 @layer components {
+  .container {
+    @apply px-24 my-4 w-full;
+  }
+
+  .colored-box {
+    @apply px-4 py-2 bg-gray-200 rounded-lg;
+  }
+
   .primary-btn {
-    @apply w-24 py-3 bg-red-500 text-white font-bold rounded-full;
+    @apply px-8 py-3 bg-black text-white font-bold rounded-lg;
+  }
+
+  .uppercased {
+    letter-spacing: 2px;
+    font-size: 15px;
+    @apply uppercase text-sm;
   }
 }
 
@@ -19,6 +33,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #f9f9f9;
+  box-sizing: border-box;
 }
 
 code {

@@ -2,7 +2,7 @@ import { ethers } from "ethers";
 import { supportedNetworks } from "./network_config";
 
 const formatAddress = (address) => {
-  return address.length == 0
+  return address === undefined
     ? ""
     : address.substring(0, 4) + "...." + address.slice(-4);
 };

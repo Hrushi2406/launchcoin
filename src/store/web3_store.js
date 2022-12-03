@@ -5,6 +5,7 @@ import { formatBigNum } from "../utils/helper";
 
 const web3Store = (set, get) => ({
   accounts: [],
+
   connectWallet: async () => {
     try {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -55,6 +56,7 @@ const web3Store = (set, get) => ({
       }
 
       const isMetamaskConnected = (await provider.listAccounts()).length > 0;
+      set({ isMetamaskConnected });
 
       if (isMetamaskConnected) {
         await get().connectWallet();
