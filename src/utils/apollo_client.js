@@ -46,7 +46,7 @@ const UNISWAP_QUERY = gql`
 `;
 
 const BALANCER_QUERY = gql`
-  query Uniswap($first: Int!) {
+  query Balancer($first: Int!) {
     users(orderBy: id, orderDirection: desc, first: $first) {
       id
     }
@@ -54,7 +54,7 @@ const BALANCER_QUERY = gql`
 `;
 
 const SYNTHETIX_QUERY = gql`
-  query Uniswap($first: Int!) {
+  query Synthetix($first: Int!) {
     snxholders(where: { balanceOf_gt: 1 }, first: $first) {
       id
       balanceOf
@@ -63,7 +63,7 @@ const SYNTHETIX_QUERY = gql`
 `;
 
 const BANCOR_QUERY = gql`
-  query Uniswap($first: Int!) {
+  query Bancor($first: Int!) {
     users(where: { numSwaps_gt: 5 }, first: $first) {
       id
     }
@@ -71,7 +71,7 @@ const BANCOR_QUERY = gql`
 `;
 
 const COMPOUND_QUERY = gql`
-  query Uniswap($first: Int!) {
+  query Compound($first: Int!) {
     accountCTokens(where: { totalUnderlyingBorrowed_gt: 0 }, first: $first) {
       account {
         id

@@ -6,6 +6,7 @@ import { useWeb3 } from "./store/web3_store";
 import { Route, Routes } from "react-router-dom";
 import { LaunchToken } from "./pages/LaunchToken";
 import { Navbar } from "./components/Navbar";
+import { AirdropPage } from "./pages/AirdropPage";
 
 function App() {
   const initWallet = useWeb3((state) => state.initWallet);
@@ -32,6 +33,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LaunchToken />} />
         <Route path="/hrushi" element={<Button label={"Click me Daddy"} />} />
+        <Route path="/airdrop/:tokenId" element={<AirdropPage />} />
       </Routes>
     </div>
   );

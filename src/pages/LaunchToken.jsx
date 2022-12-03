@@ -215,7 +215,7 @@ const FormSchema = z.object({
   shouldBurnTax: z.boolean().optional(),
 });
 
-const RadioToggle = ({ type, infoKey, register, value }) => {
+export const RadioToggle = ({ type, infoKey, register, value }) => {
   const info = inputInfo[infoKey];
 
   return (
