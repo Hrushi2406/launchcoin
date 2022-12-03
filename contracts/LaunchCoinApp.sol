@@ -7,6 +7,7 @@ import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
 import {EnumerableSet} from "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
 
 import {DataTypes} from "./utils/DataTypes.sol";
+import {IPUSHCommInterface} from "./utils/IPUSHCommInterface.sol";
 import {IUniswapV3Factory} from "./utils/IUniswapV3Factory.sol";
 import {CustomERC20} from "./CustomERC20.sol";
 
@@ -119,6 +120,26 @@ contract LaunchCoinApp is ReentrancyGuard {
                 users[i],
                 amount / users.length
             );
+
+            IPUSHCommInterface(0xb3971BCef2D791bc4027BbfedFb47319A4AAaaAa)
+                .sendNotification(
+                    0x50BAfc326eb1B2DDf86f26fa9970049a46C033EF, // from channel - recommended to set channel via dApp and put it's value -> then once contract is deployed, go back and add the contract address as delegate for your channel
+                    users[i], // to recipient, put address(this) in case you want Broadcast or Subset. For Targetted put the address to which you want to send
+                    bytes(
+                        string(
+                            // We are passing identity here: https://docs.epns.io/developers/developer-guides/sending-notifications/advanced/notification-payload-types/identity/payload-identity-implementations
+                            abi.encodePacked(
+                                "0", // this is notification identity: https://docs.epns.io/developers/developer-guides/sending-notifications/advanced/notification-payload-types/identity/payload-identity-implementations
+                                "+", // segregator
+                                "3", // this is payload type: https://docs.epns.io/developers/developer-guides/sending-notifications/advanced/notification-payload-types/payload (1, 3 or 4) = (Broadcast, targetted or subset)
+                                "+", // segregator
+                                "Received Airdrop!", // this is notificaiton title
+                                "+", // segregator
+                                "Congratulations you just received an airdrop from LaunchCoin" // notification body
+                            )
+                        )
+                    )
+                );
         }
 
         tokenToAirdropIds[tokenAddress].add(++currAirdropId);
