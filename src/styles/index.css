@@ -24,6 +24,43 @@
   }
 }
 
+.grid-area {
+  display: grid;
+  grid-template-areas:
+    "area-1 area-1 area-2"
+    "area-3 area-3 area-4"
+    "area-5 area-5 area-6";
+}
+
+.info-card {
+  background-color: white;
+  width: 100%;
+}
+
+.area-1 {
+  width: 100%;
+
+  grid-area: area-1;
+  margin-bottom: 20px;
+}
+.area-2 {
+  grid-area: area-2;
+}
+.area-3 {
+  grid-area: area-3;
+  margin-bottom: 20px;
+}
+.area-4 {
+  grid-area: area-4;
+}
+.area-5 {
+  grid-area: area-5;
+  margin-bottom: 20px;
+}
+.area-6 {
+  grid-area: area-6;
+}
+
 body {
   margin: 0;
   font-family: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",

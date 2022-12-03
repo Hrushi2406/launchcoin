@@ -2,9 +2,40 @@ import create from "zustand";
 import { ethers } from "ethers";
 import { supportedNetworks, defaultChainId } from "../utils/network_config";
 import { formatBigNum } from "../utils/helper";
+import { fetchContracts } from "../utils/fetch_contracts";
 
 const web3Store = (set, get) => ({
   accounts: [],
+
+  createToken: async ({
+    icon,
+    name,
+    symbol,
+    initialSupply,
+    maxSupply,
+    canMint,
+    canBurn,
+    isTaxable,
+    perTax,
+    shouldBurnTax,
+  }) => {
+    const launchCoinApp = get().launchCoinApp;
+
+    const tx = await launchCoinApp.createToken(
+      icon,
+      name,
+      symbol,
+      initialSupply,
+      maxSupply,
+      canMint,
+      canBurn,
+      [isTaxable, perTax * 100, shouldBurnTax]
+    );
+
+    await tx.wait();
+
+    console.log("Minted tx: ", tx);
+  },
 
   connectWallet: async () => {
     try {
@@ -24,8 +55,8 @@ const web3Store = (set, get) => ({
         throw new Error("Use Correct Network");
       }
 
-      const contracts = {};
-      // const contracts = await fetchContracts(signer, chainId);
+      // const contracts = {};
+      const contracts = await fetchContracts(signer, chainId);
 
       const balance = formatBigNum(await provider.getBalance(accounts[0]));
 

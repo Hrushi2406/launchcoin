@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { useWeb3 } from "../store/web3_store";
 import { copyToClipboard, formatAddress } from "../utils/helper";
 
@@ -7,7 +6,7 @@ export function Navbar() {
     <nav className="mx-40 my-4 flex gap-4 items-center justify-between">
       <div className="uppercased">Launch Coin</div>
 
-      <div className="flex gap-8">
+      <div className="flex gap-8 items-center">
         <a href="/dashboard" className="uppercased text-blue-800">
           Dashboard
         </a>
