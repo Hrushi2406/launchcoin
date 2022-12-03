@@ -17,10 +17,16 @@
     @apply px-8 py-3 bg-black text-white font-bold rounded-lg;
   }
 
+  .info-card {
+    background-color: white;
+    width: 100%;
+    @apply px-8 py-4 rounded-lg;
+  }
+
   .uppercased {
-    letter-spacing: 2px;
+    letter-spacing: 1.8px;
     font-size: 15px;
-    @apply uppercase text-sm;
+    @apply uppercase text-sm font-medium;
   }
 }
 
@@ -30,11 +36,6 @@
     "area-1 area-1 area-2"
     "area-3 area-3 area-4"
     "area-5 area-5 area-6";
-}
-
-.info-card {
-  background-color: white;
-  width: 100%;
 }
 
 .area-1 {
@@ -59,6 +60,10 @@
 }
 .area-6 {
   grid-area: area-6;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
