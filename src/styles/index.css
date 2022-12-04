@@ -33,6 +33,10 @@
     @apply uppercase text-sm font-medium;
   }
 }
+.grid-center {
+  display: grid;
+  place-items: center;
+}
 
 * {
   box-sizing: border-box;

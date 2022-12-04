@@ -41,13 +41,32 @@ const web3Store = (set, get) => ({
     }
   },
 
+  createAirdrop: async (amount, users) => {
+    const launchCoinApp = get().launchCoinApp;
+    const customERC20 = get().customERC20;
+
+    const tokenAddress = get().tokenInfo.contractAddress;
+
+    console.log("tokenAddress: ", tokenAddress);
+    const tx1 = await customERC20.approve(
+      supportedNetworks[get().chainId].address,
+      amount
+    );
+    await tx1.wait();
+
+    const tx = await launchCoinApp.createAirdrop(tokenAddress, amount, users);
+
+    await tx.wait();
+  },
+
   fetchMyTokens: async () => {
     const launchCoinApp = get().launchCoinApp;
     const basicInfo = await launchCoinApp.getAllTokensForUser(
       get().accounts[0]
     );
 
-    const { name, symbol, image } = basicInfo[basicInfo.length - 1];
+    const { contractAddress, name, symbol, image } =
+      basicInfo[basicInfo.length - 1];
 
     const customERC20 = get().customERC20;
 
@@ -61,6 +80,7 @@ const web3Store = (set, get) => ({
       name,
       symbol,
       image,
+      contractAddress,
       initialSupply: initialSupply.toNumber(),
       maxSupply: maxSupply.toNumber(),
       canMint,

@@ -201,14 +201,15 @@ export function LaunchToken() {
           </div>
         </div>
 
-        <pre>{JSON.stringify(watch(), null, 2)}</pre>
+        <div className="my-10"></div>
         <button className="primary-btn" type="submit">
-          Create Token
+          Create {watch().symbol} Token
         </button>
       </form>
     </div>
   );
 }
+// <pre>{JSON.stringify(watch(), null, 2)}</pre>
 
 const FormSchema = z.object({
   name: z.string(),
@@ -228,7 +229,7 @@ const FormSchema = z.object({
       message: "Please enter a number between 0-100",
     })
     .optional(),
-  shouldBurnTax: z.boolean().optional(),
+  shouldBurnTax: z.string().optional(),
 });
 
 export const RadioToggle = ({ type, infoKey, register, value }) => {

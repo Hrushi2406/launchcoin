@@ -26,7 +26,10 @@ export function Dashboard() {
           </div>
 
           <a
-            href={"#"}
+            target={"_blank"}
+            href={
+              "https://polygonscan.com/address/" + tokenInfo.contractAddress
+            }
             className="tracking-normal text-[#3B4FBA] underline underline-offset-4 "
           >
             <p>View on polyscan</p>
@@ -72,7 +75,7 @@ export function Dashboard() {
           <div className="flex items-center justify-between">
             <h6 className="font-bold tracking-wide text-lg">Airdrop</h6>
             <a
-              href="/"
+              href={"/airdrop/" + tokenInfo.contractAddress}
               className="tracking-wide font-bold text-sm text-[#3B4FBA] cursor-pointer"
             >
               + Create Airdrop
