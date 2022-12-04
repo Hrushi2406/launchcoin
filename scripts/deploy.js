@@ -2,16 +2,16 @@ const { ethers } = require("hardhat");
 
 async function main() {
   const LaunchTokenApp = await ethers.getContractFactory("LaunchCoinApp");
-  // const launchTokenApp = await LaunchTokenApp.deploy();
-  // await launchTokenApp.deployed();
+  const launchTokenApp = await LaunchTokenApp.deploy();
+  await launchTokenApp.deployed();
 
-  const launchTokenApp = LaunchTokenApp.attach(
-    "0x4fA88ddDc8cA9F29557a9Aa8Cc8F9ad66881F7D2"
-  );
+  // const launchTokenApp = LaunchTokenApp.attach(
+  //   "0x4fA88ddDc8cA9F29557a9Aa8Cc8F9ad66881F7D2"
+  // );
 
-  // console.log("contract address: ", launchTokenApp.address);
+  console.log("contract address: ", launchTokenApp.address);
 
-  await testFunction(launchTokenApp);
+  //await testFunction(launchTokenApp);
 }
 
 const testFunction = async (launchTokenApp) => {
