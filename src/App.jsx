@@ -6,7 +6,7 @@ import { useWeb3 } from "./store/web3_store";
 import { Route, Routes } from "react-router-dom";
 import { LaunchToken } from "./pages/LaunchToken";
 import { Navbar } from "./components/Navbar";
-import { AirdropPage } from "./pages/AirdropPage";
+import { Dashboard } from "./pages/Dashboard";
 
 function App() {
   const initWallet = useWeb3((state) => state.initWallet);

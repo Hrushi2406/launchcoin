@@ -14,19 +14,19 @@ import {DataTypes} from "./utils/DataTypes.sol";
  * @dev Creates CustomERC20 logic for LaunchCoinApp
  **/
 contract CustomERC20 is ERC20, ReentrancyGuard {
-    address owner;
-    uint initialSupply;
-    uint maxSupply =
+    address public owner;
+    uint256 public initialSupply;
+    uint256 public maxSupply =
         0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;
-    bool isMintAllowed;
-    bool isBurnAllowed;
-    DataTypes.TaxVars taxVars;
+    bool public isMintAllowed;
+    bool public isBurnAllowed;
+    DataTypes.TaxVars public taxVars;
 
     constructor(
         string memory _name,
         string memory _symbol,
-        uint _initialSupply,
-        uint _maxSupply,
+        uint256 _initialSupply,
+        uint256 _maxSupply,
         bool _isMintAllowed,
         bool _isBurnAllowed,
         DataTypes.TaxVars memory _taxVars,

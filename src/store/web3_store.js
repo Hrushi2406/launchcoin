@@ -7,7 +7,7 @@ import { fetchContracts } from "../utils/fetch_contracts";
 const web3Store = (set, get) => ({
   accounts: [],
 
-  createToken: async ({
+  createToken: async (
     icon,
     name,
     symbol,
@@ -17,24 +17,64 @@ const web3Store = (set, get) => ({
     canBurn,
     isTaxable,
     perTax,
-    shouldBurnTax,
-  }) => {
+    shouldBurnTax
+  ) => {
     const launchCoinApp = get().launchCoinApp;
 
-    const tx = await launchCoinApp.createToken(
-      icon,
-      name,
-      symbol,
-      initialSupply,
-      maxSupply,
-      canMint,
-      canBurn,
-      [isTaxable, perTax * 100, shouldBurnTax]
+    try {
+      const tx = await launchCoinApp.createToken(
+        icon,
+        name,
+        symbol,
+        initialSupply,
+        maxSupply,
+        canMint,
+        canBurn,
+        [isTaxable, parseFloat(perTax) * 100, shouldBurnTax]
+      );
+
+      await tx.wait();
+
+      console.log("Minted tx: ", tx);
+    } catch (err) {
+      console.log("err: ", err);
+    }
+  },
+
+  fetchMyTokens: async () => {
+    const launchCoinApp = get().launchCoinApp;
+    const basicInfo = await launchCoinApp.getAllTokensForUser(
+      get().accounts[0]
     );
 
-    await tx.wait();
+    const { name, symbol, image } = basicInfo[basicInfo.length - 1];
 
-    console.log("Minted tx: ", tx);
+    const customERC20 = get().customERC20;
+
+    const initialSupply = await customERC20.initialSupply();
+    const maxSupply = await customERC20.maxSupply();
+    const canMint = await customERC20.isMintAllowed();
+    const canBurn = await customERC20.isBurnAllowed();
+    const taxVars = await customERC20.taxVars();
+
+    const tokenInfo = {
+      name,
+      symbol,
+      image,
+      initialSupply: initialSupply.toNumber(),
+      maxSupply: maxSupply.toNumber(),
+      canMint,
+      canBurn,
+      isTaxable: taxVars.isTaxed,
+      shouldBurnTax: taxVars.shouldBurnTax,
+      taxFeePer: taxVars.taxPercentage.toNumber() / 100,
+    };
+
+    console.log("tokenInfo: ", tokenInfo);
+
+    set({
+      tokenInfo,
+    });
   },
 
   connectWallet: async () => {
@@ -56,7 +96,7 @@ const web3Store = (set, get) => ({
       }
 
       // const contracts = {};
-      const contracts = await fetchContracts(signer, chainId);
+      const contracts = await fetchContracts(signer, chainId, accounts[0]);
 
       const balance = formatBigNum(await provider.getBalance(accounts[0]));
 
@@ -67,6 +107,7 @@ const web3Store = (set, get) => ({
         balance: parseFloat(balance),
         ...contracts,
       });
+      get().fetchMyTokens();
     } catch (e) {
       set({ error: e.message });
 
@@ -92,9 +133,7 @@ const web3Store = (set, get) => ({
       if (isMetamaskConnected) {
         await get().connectWallet();
       } else {
-        //const contracts = await fetchContracts(provider, defaultChainId);
-        //
-        const contracts = {};
+        const contracts = await fetchContracts(provider, defaultChainId, "");
 
         set({ ...contracts, provider });
       }

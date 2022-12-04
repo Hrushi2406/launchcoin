@@ -6,9 +6,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InfoCircle, InputField } from "../components/InputField";
 import { inputInfo } from "../utils/input-info";
+import { useWeb3 } from "../store/web3_store";
 
 export function LaunchToken() {
   const [url, seturl] = React.useState();
+  const createToken = useWeb3((state) => state.createToken);
 
   const {
     register,
@@ -26,14 +28,28 @@ export function LaunchToken() {
       canMint: false,
       canBurn: false,
       isTaxable: false,
-      taxFeePer: 0.0001,
+      taxFeePer: 0.01,
       shouldBurnTax: false,
     },
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     try {
+      console.log("url: ", url);
+      if (!url) return;
       console.log("dans onSubmit", data);
+      await createToken(
+        url,
+        data.name,
+        data.symbol,
+        data.initialSupply,
+        data.maxSupply,
+        data.canMint,
+        data.canBurn,
+        data.isTaxable,
+        data.taxFeePer,
+        data.shouldBurnTax
+      );
     } catch (err) {
       console.log(err);
     }

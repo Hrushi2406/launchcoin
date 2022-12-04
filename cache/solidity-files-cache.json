@@ -515,6 +515,41 @@
       "artifacts": [
         "Math"
       ]
+    },
+    "/Users/hrushi/Projects/Crypto/launchcoin/contracts/utils/IPUSHCommInterface.sol": {
+      "lastModificationDate": 1670103451349,
+      "contentHash": "d1b84cad97b9b540e69740c8b0decaa2",
+      "sourceName": "contracts/utils/IPUSHCommInterface.sol",
+      "solcConfig": {
+        "version": "0.8.7",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IPUSHCommInterface"
+      ]
     }
   }
 }
